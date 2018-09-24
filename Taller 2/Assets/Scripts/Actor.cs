@@ -4,7 +4,7 @@
 
 public abstract class Actor : MonoBehaviour {
 
-    bool sickness;
+    [SerializeField] protected bool sickness;
     float sickTime; //Time with sickness (in seconds)
     float timeToDie; //Time left to die (in seconds)
 

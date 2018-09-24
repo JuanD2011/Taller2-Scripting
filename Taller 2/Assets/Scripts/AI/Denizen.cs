@@ -2,7 +2,7 @@
 
 public class Denizen : AI {
     
-    [SerializeField] Transform[] points;
+    [SerializeField] protected Transform[] points;
     private int destination = 0;
 
     protected override void Start()
@@ -17,7 +17,7 @@ public class Denizen : AI {
         GotoNextPoint();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (agent.remainingDistance < 0.5f)
             GotoNextPoint();
