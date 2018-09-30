@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Player : Actor {
+public class Player : Actor
+{
 
     private Vector2 input, inputDirection;
     private float targetRotation;
@@ -34,8 +35,8 @@ public class Player : Actor {
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVel, speedSmooothTime);
 
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
-        //animationSpeedPercent = ((speedPU) ? 1 : 0.5f) * inputDirection.magnitude;
-       // m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime);
+        animationSpeedPercent = 0.5f * inputDirection.magnitude;
+        m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime);
     }
 
 }
