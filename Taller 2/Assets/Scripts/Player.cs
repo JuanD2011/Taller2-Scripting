@@ -11,6 +11,8 @@ public class Player : Actor
 
     protected float speedSmooothTime = 0.075f, animationSpeedPercent;
 
+    bool key = false;
+
     private void Update()
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -39,4 +41,20 @@ public class Player : Actor
         m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Key") {
+            key = true;
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "WinCondition")
+            if(key)
+                print("Won");
+            else
+                print("you need the key");
+    }
 }
