@@ -13,13 +13,13 @@ public class Denizen : AI {
             a.parent = null;
         }
 
-        agent.autoBraking = false;
+        Agent.autoBraking = false;
         GotoNextPoint();
     }
 
     protected virtual void Update()
     {
-        if (agent.remainingDistance < 0.5f)
+        if (Agent.remainingDistance < 0.5f)
             GotoNextPoint();
     }
 
@@ -29,7 +29,7 @@ public class Denizen : AI {
             Debug.LogError("Assign waypoints");
         else
         {
-            agent.destination = points[destination].position;
+            Agent.destination = points[destination].position;
             destination = (destination + 1) % points.Length;
         }
     }

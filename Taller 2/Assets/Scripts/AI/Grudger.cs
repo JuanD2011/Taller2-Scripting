@@ -25,7 +25,7 @@ public class Grudger : AI {
         {
             StartCoroutine(Pushing());
 
-            if (distanceToPlayer <= agent.stoppingDistance)
+            if (distanceToPlayer <= Agent.stoppingDistance)
             {
                 LookAt(player);
             }
@@ -43,9 +43,9 @@ public class Grudger : AI {
         float t = 0f;
         while (t < pursuitTime) {
             t += Time.deltaTime;
-            agent.SetDestination(player.position);
+            Agent.SetDestination(player.position);
             yield return null;
         }
-        agent.SetDestination(transform.localPosition);
+        Agent.SetDestination(transform.localPosition);
     }
 }

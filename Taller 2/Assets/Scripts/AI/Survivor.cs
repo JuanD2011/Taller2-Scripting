@@ -17,7 +17,7 @@ public class Survivor : Denizen {
             yield return new WaitForSeconds(4);
             if (Physics.SphereCast(transform.localPosition, 10, transform.forward,out hit)) {
                 if (hit.collider.GetComponent<Vaccine>() != null) {
-                    agent.SetDestination(hit.transform.position);
+                    Agent.SetDestination(hit.transform.position);
                 }
             }
         }

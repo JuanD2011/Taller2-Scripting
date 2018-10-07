@@ -23,8 +23,11 @@ public abstract class Actor : MonoBehaviour {
     {
         if (collision.gameObject.GetComponent<Actor>() != null) {
             float random = Random.Range(0f, 1f);
-            if(random <= probToGetSick)
+            if (random <= probToGetSick && GetComponent<Disease>()!= null) {
+                Disease disease = GetComponent<Disease>();
+                print(disease);
                 print("Contagiado");
+            }
         }
     }
 }

@@ -3,12 +3,24 @@ using UnityEngine;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class AI : Actor {
+public abstract class AI : Actor {
 
-    protected NavMeshAgent agent;
+    private NavMeshAgent agent;
+    public NavMeshAgent Agent
+    {
+        get
+        {
+            return agent;
+        }
+
+        set
+        {
+            agent = value;
+        }
+    }
 
     protected virtual void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
     }
 }
