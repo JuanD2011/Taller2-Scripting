@@ -13,6 +13,32 @@ public class Player : Actor
 
     bool key = false;
 
+    public float MoveSpeed
+    {
+        get
+        {
+            return moveSpeed;
+        }
+
+        set
+        {
+            moveSpeed = value;
+        }
+    }
+
+    public float TurnSmooth
+    {
+        get
+        {
+            return turnSmooth;
+        }
+
+        set
+        {
+            turnSmooth = value;
+        }
+    }
+
     private void Update()
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -30,10 +56,10 @@ public class Player : Actor
         if (inputDirection != Vector2.zero)
         {
             targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.y) * Mathf.Rad2Deg;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVel, turnSmooth);
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVel, TurnSmooth);
         }
 
-        targetSpeed = moveSpeed * inputDirection.magnitude;
+        targetSpeed = MoveSpeed * inputDirection.magnitude;
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVel, speedSmooothTime);
 
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);

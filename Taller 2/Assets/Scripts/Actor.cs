@@ -25,9 +25,29 @@ public abstract class Actor : MonoBehaviour {
             float random = Random.Range(0f, 1f);
             if (random <= probToGetSick && GetComponent<Disease>()!= null) {
                 Disease disease = GetComponent<Disease>();
-                print(disease);
+                SetDisease(disease, collision.gameObject.GetComponent<Actor>());
                 print("Contagiado");
             }
         }
+    }
+
+    private void SetDisease(Disease _disease, Actor _actor) {
+        switch (_disease.Type) {
+            case DiseaseType.VirusA:
+                if(_actor.GetComponent<VirusA>() == null)
+                    _actor.gameObject.AddComponent<VirusA>();
+                break;
+            case DiseaseType.VirusS:
+                if (_actor.GetComponent<VirusS>() == null)
+                    _actor.gameObject.AddComponent<VirusS>();
+                break;
+            case DiseaseType.BlackDeath:
+                if (_actor.GetComponent<BlackDeath>() == null)
+                    _actor.gameObject.AddComponent<BlackDeath>();
+                break;
+            default:
+                break;
+        }
+
     }
 }

@@ -2,29 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackDeath : Disease
+public class BlackDeath : VirusS
 {
-    private float speedDecrease = 0.05f;
-
-    private void Awake()
+    protected override void Start()
     {
         onSet = 40f;
         timeUntilDeath = 10f;
+        speedDecrease = 0.05f;
+        percentFloat = 0.15f;
+        type = DiseaseType.BlackDeath;
+        Invoke("ShowSymptoms", onSet);
+    }
+
+    protected override void ShowSymptoms()
+    {
         InvokeRepeating("DecreaseSpeed", 1f, 4f);
         InvokeRepeating("Freeze", 1f, 10f);
+        Invoke("KillActor", timeUntilDeath);
     }
 
-    private void DecreaseSpeed()
+    protected override void DecreaseActorSpeed(float _percentOfDecrease)
     {
-        //El jugador pierde velocidad
+        base.DecreaseActorSpeed(_percentOfDecrease);
     }
 
-    private void Freeze()
+    protected override IEnumerator StopMovement(AI _aI)
     {
-        float random = Random.Range(0, 1);
-        if (random <= 0.15f)
-        {
-            //El jugador se queda quieto durante 3 segundos
-        }
+        yield return new WaitForSeconds(3f);
+        _aI.Agent.isStopped = false;
+    }
+
+    protected override IEnumerator StopMovement(Player _player, float _actualSpeed)
+    {
+        yield return new WaitForSeconds(3f);
+        _player.MoveSpeed = _actualSpeed;
     }
 }

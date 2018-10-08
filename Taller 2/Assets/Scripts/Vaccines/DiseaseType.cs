@@ -1,5 +1,5 @@
 ﻿
-public enum EnumVaccine{
+public enum DiseaseType{
     VirusA,
     VirusS,
     BlackDeath

@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Vaccine : MonoBehaviour {
-    [SerializeField] EnumVaccine typeVaccine;
+    [SerializeField] DiseaseType typeVaccine;
 }
