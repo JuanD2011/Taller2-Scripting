@@ -11,9 +11,24 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public SkinnedMeshRenderer[] SkinnedMeshRenderer
+    {
+        get
+        {
+            return skinnedMeshRenderer;
+        }
+
+        set
+        {
+            skinnedMeshRenderer = value;
+        }
+    }
     public GameObject player;
 
+    SkinnedMeshRenderer[] skinnedMeshRenderer;
+
     void Awake () {
-       instance = this;
+        instance = this;
+        skinnedMeshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
 	}
 }

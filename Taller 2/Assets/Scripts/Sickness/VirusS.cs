@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class VirusS : VirusA
 {
-    protected float percentFloat;
+    protected float percentToGetFreeze;
 
     protected virtual void Start()
     {
-        percentFloat = 0.05f;
+        percentToGetFreeze = 0.05f;
         speedDecrease = 0.2f;
-        onSet = 5f;
-        timeUntilDeath = 20f;
+        onSet = 45f;
+        timeUntilDeath = 30f;
         type = DiseaseType.VirusS;
         Invoke("ShowSymptoms", onSet);
     }
 
     protected override void ShowSymptoms()
     {
+        ChangeColor(Color.red);
         InvokeRepeating("Freeze", 0f, 10f);
-        Invoke("KillActor", timeUntilDeath);
         DecreaseActorSpeed(speedDecrease);
+        Invoke("KillActor", timeUntilDeath);
     }
 
     protected void Freeze()
     {
         float random = Random.Range(0f, 1f);
         print(random);
-        if(random <= percentFloat)
+        if(random <= percentToGetFreeze)
         {
             //El jugador se queda quieto 2 segundos
             if (GetComponent<AI>() != null) {
@@ -42,11 +43,6 @@ public class VirusS : VirusA
                 StartCoroutine(StopMovement(mPlayer, actualSpeed));
             }
         }
-    }
-
-    protected override void DecreaseActorSpeed(float _percentOfDecrease)
-    {
-        base.DecreaseActorSpeed(_percentOfDecrease);
     }
 
     protected virtual IEnumerator StopMovement(AI _aI) {
