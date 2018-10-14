@@ -4,28 +4,41 @@ using UnityEngine;
 
 public abstract class Disease : MonoBehaviour
 {
-    protected float onSet; //After this time Actor is going to show symptoms
-    protected float timeUntilDeath; //After this time Actor will be dead;
+    private float onSet; //After this time Actor is going to show symptoms
+    private float timeUntilDeath; //After this time Actor will be dead;
 
     protected DiseaseType type;
+    protected float speedDecrease;
 
+    public float OnSet
+    {
+        get
+        {
+            return onSet;
+        }
+
+        set
+        {
+            onSet = value;
+        }
+    }
+    public float TimeUntilDeath
+    {
+        get
+        {
+            return timeUntilDeath;
+        }
+
+        set
+        {
+            timeUntilDeath = value;
+        }
+    }
     public DiseaseType Type {
         get { return type; }
     }
 
-    protected float speedDecrease;
-
     protected abstract void ShowSymptoms();
-
-    protected void KillActor() {
-        if (GetComponent<AI>() != null)
-            Destroy(gameObject);
-        else {
-            Time.timeScale = 0f;
-            print("Game Over");
-        }
-            
-    }
 
     protected void ChangeColor(Color _color)
     {

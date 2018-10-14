@@ -10,10 +10,10 @@ public class VirusS : VirusA
     {
         percentToGetFreeze = 0.05f;
         speedDecrease = 0.2f;
-        onSet = 45f;
-        timeUntilDeath = 30f;
+        OnSet = 45f;
+        TimeUntilDeath = 30f;
         type = DiseaseType.VirusS;
-        Invoke("ShowSymptoms", onSet);
+        Invoke("ShowSymptoms", OnSet);
     }
 
     protected override void ShowSymptoms()
@@ -21,7 +21,6 @@ public class VirusS : VirusA
         ChangeColor(Color.red);
         InvokeRepeating("Freeze", 0f, 10f);
         DecreaseActorSpeed(speedDecrease);
-        Invoke("KillActor", timeUntilDeath);
     }
 
     protected void Freeze()

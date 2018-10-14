@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Survivor : Denizen {
 
-    protected override void Update()
+    /*protected override void Update()
     {
         base.Update();
         if (sickness) {
@@ -21,5 +21,5 @@ public class Survivor : Denizen {
                 }
             }
         }
-    }
+    }*/
 }
