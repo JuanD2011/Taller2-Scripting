@@ -19,8 +19,9 @@ public abstract class AI : Actor {
         }
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         Agent = GetComponent<NavMeshAgent>();
     }
 }

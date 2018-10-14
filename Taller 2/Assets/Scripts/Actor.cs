@@ -13,20 +13,21 @@ public abstract class Actor : MonoBehaviour {
     protected Rigidbody m_Rigidbody;//Actor's Rigidbody
     protected Animator m_Animator;//Actor's Animator
 
-    private void Start()
+    protected virtual void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
 
-        //if (GetComponent<Disease>() != null)
-          //  StartCoroutine(StartSick(GetComponent<Disease>()));
+        if (GetComponent<Disease>() != null) {
+            StartCoroutine(StartSick(GetComponent<Disease>()));
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Actor>() != null) {
             float random = Random.Range(0f, 1f);
-            if (random <= probToGetSick && GetComponent<Disease>()!= null) {
+            if (random <= probToGetSick && GetComponent<Disease>() != null) {
                 Disease disease = GetComponent<Disease>();
                 SetDisease(disease, collision.gameObject.GetComponent<Actor>());
                 print("Contagiado");
@@ -55,7 +56,6 @@ public abstract class Actor : MonoBehaviour {
     }
 
     IEnumerator StartSick(Disease _disease) {
-        Debug.Log(_disease.name + "Hey Im Ready To Fuck You");
         sickTime = 0f;
         while (sickTime < _disease.OnSet) {
             sickTime += Time.deltaTime;

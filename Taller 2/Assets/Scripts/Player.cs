@@ -39,6 +39,11 @@ public class Player : Actor
         }
     }
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     private void Update()
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));

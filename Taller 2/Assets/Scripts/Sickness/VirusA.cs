@@ -13,7 +13,7 @@ public class VirusA : Disease
 
     protected override void ShowSymptoms()
     {
-        ChangeColor(Color.yellow);
+        ChangeColor(Color.green);
         DecreaseActorSpeed(speedDecrease);//speed decreased
     }
 }
