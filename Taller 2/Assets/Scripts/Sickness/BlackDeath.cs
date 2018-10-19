@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BlackDeath : VirusS
@@ -9,7 +8,7 @@ public class BlackDeath : VirusS
         OnSet = 60f;
         TimeUntilDeath = 20f;
         speedDecrease = 0.05f;
-        percentToGetFreeze = 0.15f;
+        probToGetFreeze = 0.15f;
         type = DiseaseType.BlackDeath;
         Invoke("ShowSymptoms", OnSet);
     }
@@ -23,25 +22,28 @@ public class BlackDeath : VirusS
             AI aI = GetComponent<AI>();
             StartCoroutine(DecreaseSpeed(aI));
         }
-        else if (GetComponent<Player>() != null) {
+        else if (GetComponent<Player>() != null)
+        {
             Player player = GetComponent<Player>();
             StartCoroutine(DecreaseSpeed(player));
         }
-
         InvokeRepeating("Freeze", 0f, 10f);
     }
 
-    IEnumerator DecreaseSpeed(AI _aI) {
+    IEnumerator DecreaseSpeed(AI _aI)
+    {
         float speed = 0f;
         speed = _aI.Agent.speed;
         float fortyPercent = speed * 0.4f;
-        while (_aI.Agent.speed > speed - fortyPercent) {
+        while (_aI.Agent.speed > speed - fortyPercent)
+        {
             DecreaseActorSpeed(speedDecrease);
             yield return new WaitForSeconds(4f);
         }
     }
 
-    IEnumerator DecreaseSpeed(Player _player) {
+    IEnumerator DecreaseSpeed(Player _player)
+    {
         float speed = 0f;
         speed = _player.MoveSpeed;
         float fortyPercent = speed * 0.4f;

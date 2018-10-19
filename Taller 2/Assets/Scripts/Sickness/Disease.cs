@@ -16,7 +16,6 @@ public abstract class Disease : MonoBehaviour
         {
             return onSet;
         }
-
         set
         {
             onSet = value;
@@ -28,12 +27,12 @@ public abstract class Disease : MonoBehaviour
         {
             return timeUntilDeath;
         }
-
         set
         {
             timeUntilDeath = value;
         }
     }
+
     public DiseaseType Type {
         get { return type; }
     }

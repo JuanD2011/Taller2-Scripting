@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Grudger : AI {
-
-    [SerializeField] float minPushDistance;
+public class Grudger : AI
+{
+    [SerializeField] float minPursuitDistance;
     [SerializeField] float pursuitTime;
 
     private float distanceToPlayer;
@@ -21,9 +21,9 @@ public class Grudger : AI {
     {
         distanceToPlayer = Vector3.Distance(player.localPosition, transform.localPosition);
 
-        if (distanceToPlayer <= minPushDistance)
+        if (distanceToPlayer <= minPursuitDistance)
         {
-            StartCoroutine(Pushing());
+            StartCoroutine(Pursuit());
 
             if (distanceToPlayer <= Agent.stoppingDistance)
             {
@@ -39,9 +39,11 @@ public class Grudger : AI {
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
-    IEnumerator Pushing() {
+    IEnumerator Pursuit()
+    {
         float t = 0f;
-        while (t < pursuitTime) {
+        while (t < pursuitTime)
+        {
             t += Time.deltaTime;
             Agent.SetDestination(player.position);
             yield return null;

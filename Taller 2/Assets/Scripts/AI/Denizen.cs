@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class Denizen : AI {
-    
+public class Denizen : AI
+{    
     [SerializeField] protected Transform[] points;
     private int destination = 0;
 
@@ -9,7 +9,8 @@ public class Denizen : AI {
     {
         base.Start();
 
-        foreach (Transform a in points) {
+        foreach (Transform a in points)
+        {
             a.parent = null;
         }
 

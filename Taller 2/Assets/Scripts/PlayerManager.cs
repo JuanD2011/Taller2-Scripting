@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
             skinnedMeshRenderer = value;
         }
     }
+
     public GameObject player;
 
     SkinnedMeshRenderer[] skinnedMeshRenderer;

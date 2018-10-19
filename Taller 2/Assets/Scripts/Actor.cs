@@ -2,13 +2,13 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
+public abstract class Actor : MonoBehaviour
+{
 
-public abstract class Actor : MonoBehaviour {
+    private float sickTime; //Time with sickness (in seconds)
+    private float timeToDie; //Time left to die (in seconds)
 
-    float sickTime; //Time with sickness (in seconds)
-    float timeToDie; //Time left to die (in seconds)
-
-    float probToGetSick = 1f; //Probability to get sick (initially 100%)
+    private float probToGetSick = 1f; //Probability to get sick (initially 100%)
 
     protected Rigidbody m_Rigidbody;//Actor's Rigidbody
     protected Animator m_Animator;//Actor's Animator
@@ -18,7 +18,8 @@ public abstract class Actor : MonoBehaviour {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
 
-        if (GetComponent<Disease>() != null) {
+        if (GetComponent<Disease>() != null)
+        {
             StartCoroutine(StartSick(GetComponent<Disease>()));
         }
     }
@@ -55,18 +56,22 @@ public abstract class Actor : MonoBehaviour {
         StartCoroutine(StartSick(_disease));
     }
 
-    IEnumerator StartSick(Disease _disease) {
+    IEnumerator StartSick(Disease _disease)
+    {
         sickTime = 0f;
-        while (sickTime < _disease.OnSet) {
+        while (sickTime < _disease.OnSet)
+        {
             sickTime += Time.deltaTime;
             yield return null;
         }
         StartCoroutine(StartDeath(_disease));
     }
 
-    IEnumerator StartDeath(Disease _disease) {
+    IEnumerator StartDeath(Disease _disease)
+    {
         timeToDie = 0f;
-        while (timeToDie < _disease.TimeUntilDeath) {
+        while (timeToDie < _disease.TimeUntilDeath)
+        {
             timeToDie += Time.deltaTime;
             yield return null;
         }
@@ -75,11 +80,13 @@ public abstract class Actor : MonoBehaviour {
 
     private void KillActor()
     {
-        if (GetComponent<AI>() != null) {
+        if (GetComponent<AI>() != null)
+        {
             GetComponent<AI>().enabled = false;
             Debug.Log("Desactivado");
         }
-        else if(GetComponent<Player>()!=null){
+        else if(GetComponent<Player>()!=null)
+        {
             GetComponent<Player>().MoveSpeed = 0f;
             Time.timeScale = 0f;
             print("Game Over");

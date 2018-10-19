@@ -1,14 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VirusS : VirusA
 {
-    protected float percentToGetFreeze;
+    protected float probToGetFreeze;
 
     protected virtual void Start()
     {
-        percentToGetFreeze = 0.05f;
+        probToGetFreeze = 0.05f;
         speedDecrease = 0.2f;
         OnSet = 45f;
         TimeUntilDeath = 30f;
@@ -27,15 +26,17 @@ public class VirusS : VirusA
     {
         float random = Random.Range(0f, 1f);
         print(random);
-        if(random <= percentToGetFreeze)
+        if(random <= probToGetFreeze)
         {
             //El jugador se queda quieto 2 segundos
-            if (GetComponent<AI>() != null) {
+            if (GetComponent<AI>() != null)
+            {
                 AI mAI = GetComponent<AI>();
                 mAI.Agent.isStopped = true;
                 StartCoroutine(StopMovement(mAI));
             }
-            if (GetComponent<Player>() != null) {
+            if (GetComponent<Player>() != null)
+            {
                 Player mPlayer = GetComponent<Player>();
                 float actualSpeed = mPlayer.MoveSpeed;
                 mPlayer.MoveSpeed = 0f;
@@ -44,7 +45,8 @@ public class VirusS : VirusA
         }
     }
 
-    protected virtual IEnumerator StopMovement(AI _aI) {
+    protected virtual IEnumerator StopMovement(AI _aI)
+    {
         yield return new WaitForSeconds(2f);
         _aI.Agent.isStopped = false;
     }

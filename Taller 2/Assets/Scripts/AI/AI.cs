@@ -2,9 +2,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(NavMeshAgent))]
-
-public abstract class AI : Actor {
-
+public abstract class AI : Actor
+{
     private NavMeshAgent agent;
     public NavMeshAgent Agent
     {
@@ -12,16 +11,11 @@ public abstract class AI : Actor {
         {
             return agent;
         }
-
-        set
-        {
-            agent = value;
-        }
     }
 
     protected override void Start()
     {
         base.Start();
-        Agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
     }
 }
