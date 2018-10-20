@@ -18,6 +18,7 @@ public abstract class Actor : MonoBehaviour
     protected bool isSick = false;
 
     public delegate void DelActor();
+    public DelActor delActor;
 
     protected virtual void Start()
     {
@@ -26,7 +27,7 @@ public abstract class Actor : MonoBehaviour
 
         if (GetComponent<Disease>() != null)
         {
-            isSick = true;
+            isSick = true;//is used by survivor
             disease = GetComponent<Disease>();
             StartCoroutine(StartSick(disease));
         }
@@ -35,8 +36,8 @@ public abstract class Actor : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Actor>() != null) {
-            if (disease != null) {
-                //disease = GetComponent<Disease>();
+            if (GetComponent<Disease>() != null) {//No está suucediendo
+                disease = GetComponent<Disease>();
                 SetDisease(disease, collision.gameObject.GetComponent<Actor>());
             }
         }
@@ -73,6 +74,7 @@ public abstract class Actor : MonoBehaviour
             yield return null;
         }
         isSick = true;
+        delActor();
         StartCoroutine(StartDeath(_disease));
     }
 

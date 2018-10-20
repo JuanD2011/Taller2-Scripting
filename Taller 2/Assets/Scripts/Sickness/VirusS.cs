@@ -5,14 +5,14 @@ public class VirusS : VirusA
 {
     protected float probToGetFreeze;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         probToGetFreeze = 0.05f;
         speedDecrease = 0.2f;
         OnSet = 45f;
         TimeUntilDeath = 30f;
         type = DiseaseType.VirusS;
-        //Invoke("ShowSymptoms", OnSet);
     }
 
     protected override void ShowSymptoms()

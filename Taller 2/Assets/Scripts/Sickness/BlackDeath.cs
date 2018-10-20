@@ -5,6 +5,7 @@ public class BlackDeath : VirusS
 {
     protected override void Start()
     {
+        base.Start();
         OnSet = 60f;
         TimeUntilDeath = 20f;
         speedDecrease = 0.05f;
@@ -20,7 +21,6 @@ public class BlackDeath : VirusS
             Player player = GetComponent<Player>();
             StartCoroutine(DecreaseSpeed(player));
         }
-        //Invoke("ShowSymptoms", OnSet);
         InvokeRepeating("Freeze", 0f, 10f);
     }
 

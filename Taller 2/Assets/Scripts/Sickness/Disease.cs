@@ -38,8 +38,9 @@ public abstract class Disease : MonoBehaviour
     }
 
 
-    private void Start()
+    protected virtual void Start()
     {
+        GetComponent<Actor>().delActor = ShowSymptoms;
     }
 
     protected abstract void ShowSymptoms();
