@@ -37,6 +37,11 @@ public abstract class Disease : MonoBehaviour
         get { return type; }
     }
 
+
+    private void Start()
+    {
+    }
+
     protected abstract void ShowSymptoms();
 
     protected void ChangeColor(Color _color)

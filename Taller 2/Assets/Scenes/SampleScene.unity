@@ -600,6 +600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 1887457878635178, guid: c7c439e7abe58b946a129dbccb8a8dea, type: 2}
   plane: {fileID: 86540776}
+  vaccineTemplate: {fileID: 0}
+  numberOfEachVaccine: 0
 --- !u!1 &270362287
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5ae9ad03bac9f40a1d26f53e669b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeVaccine: 0
 --- !u!135 &270362289
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1005,17 +1006,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &408339947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 408339943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb6daa3c91499674bbf6f1602aaed5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &428002572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec32702b05a4e0f42bba50ecbc81dc93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPushDistance: 25
+  minPursuitDistance: 0
   pursuitTime: 4
 --- !u!54 &428002578
 Rigidbody:

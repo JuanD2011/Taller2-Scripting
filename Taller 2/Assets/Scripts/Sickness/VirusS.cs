@@ -12,7 +12,7 @@ public class VirusS : VirusA
         OnSet = 45f;
         TimeUntilDeath = 30f;
         type = DiseaseType.VirusS;
-        Invoke("ShowSymptoms", OnSet);
+        //Invoke("ShowSymptoms", OnSet);
     }
 
     protected override void ShowSymptoms()

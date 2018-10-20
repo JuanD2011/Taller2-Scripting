@@ -8,7 +8,7 @@ public class VirusA : Disease
         OnSet = 3f;//30
         TimeUntilDeath = 4f;//40
         type = DiseaseType.VirusA;
-        Invoke("ShowSymptoms", OnSet);
+        //Invoke("ShowSymptoms", OnSet);
     }
 
     protected override void ShowSymptoms()

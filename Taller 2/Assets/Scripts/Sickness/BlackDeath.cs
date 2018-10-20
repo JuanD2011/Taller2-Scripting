@@ -10,13 +10,6 @@ public class BlackDeath : VirusS
         speedDecrease = 0.05f;
         probToGetFreeze = 0.15f;
         type = DiseaseType.BlackDeath;
-        Invoke("ShowSymptoms", OnSet);
-    }
-
-    protected override void ShowSymptoms()
-    {
-        ChangeColor(Color.black);
-
         if (GetComponent<AI>() != null)
         {
             AI aI = GetComponent<AI>();
@@ -27,7 +20,15 @@ public class BlackDeath : VirusS
             Player player = GetComponent<Player>();
             StartCoroutine(DecreaseSpeed(player));
         }
+        //Invoke("ShowSymptoms", OnSet);
         InvokeRepeating("Freeze", 0f, 10f);
+    }
+
+    protected override void ShowSymptoms()
+    {
+        ChangeColor(Color.black);
+        probToGetFreeze = 1f;
+        Invoke("Freeze", 0);
     }
 
     IEnumerator DecreaseSpeed(AI _aI)
