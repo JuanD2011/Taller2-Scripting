@@ -6,8 +6,8 @@ public class VirusA : Disease
     {
         base.Start();
         speedDecrease = 0.1f;
-        OnSet = 3f;//30
-        TimeUntilDeath = 4f;//40
+        OnSet = 30f;//30
+        TimeUntilDeath = 40f;//40
         type = DiseaseType.VirusA;
     }
 

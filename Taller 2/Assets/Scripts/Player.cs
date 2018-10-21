@@ -39,6 +39,14 @@ public class Player : Actor
         }
     }
 
+    public bool Key
+    {
+        set
+        {
+            key = value;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -72,16 +80,9 @@ public class Player : Actor
         m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Key") {
-            key = true;
-            Destroy(other.gameObject);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
+        base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "WinCondition")
             if(key)
                 print("Won");

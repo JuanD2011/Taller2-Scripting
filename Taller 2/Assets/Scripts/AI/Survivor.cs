@@ -6,24 +6,22 @@ public class Survivor : Denizen
     protected override void Update()
     {
         base.Update();
-        if (isSick)
-        {
-            StartCoroutine(SearchForVaccines());
-        }
     }
 
-    IEnumerator SearchForVaccines()
+    protected override void SetDisease(Disease _disease, Actor _actor)
     {
+        base.SetDisease(_disease, _actor);
+        InvokeRepeating("GetVaccine", 0, 4);
+    }
+
+    private void GetVaccine() {
+
         RaycastHit hit;
-        while (isSick)
+        if (Physics.SphereCast(transform.localPosition, 10, transform.forward, out hit))
         {
-            yield return new WaitForSeconds(4);
-            if (Physics.SphereCast(transform.localPosition, 10, transform.forward, out hit))
+            if (hit.collider.GetComponent<Vaccine>() != null)
             {
-                if (hit.collider.GetComponent<Vaccine>() != null)
-                {
-                    Agent.SetDestination(hit.transform.position);
-                }
+                Agent.SetDestination(hit.transform.position);
             }
         }
     }

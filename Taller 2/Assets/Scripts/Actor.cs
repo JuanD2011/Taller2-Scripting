@@ -15,7 +15,6 @@ public abstract class Actor : MonoBehaviour
 
     protected Rigidbody m_Rigidbody;//Actor's Rigidbody
     protected Animator m_Animator;//Actor's Animator
-    protected bool isSick = false;
 
     public delegate void DelActor();
     public DelActor delActor;
@@ -25,25 +24,34 @@ public abstract class Actor : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
 
-        if (GetComponent<Disease>() != null)
+        disease = GetComponent<Disease>();
+        print(disease);
+
+        if (disease != null)
         {
-            isSick = true;//is used by survivor
-            disease = GetComponent<Disease>();
             StartCoroutine(StartSick(disease));
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Actor>() != null) {
-            if (GetComponent<Disease>() != null) {//No está suucediendo
-                disease = GetComponent<Disease>();
+            print(string.Format("{0}'s disease: {1}", gameObject.name, disease));
+            if (disease != null)
+            {
                 SetDisease(disease, collision.gameObject.GetComponent<Actor>());
+            }
+            else {
+                disease = GetComponent<Disease>();
+                if (disease != null)
+                {
+                    SetDisease(disease, collision.gameObject.GetComponent<Actor>());
+                }
             }
         }
     }
 
-    private void SetDisease(Disease _disease, Actor _actor) {
+    protected virtual void SetDisease(Disease _disease, Actor _actor) {
         float random = Random.Range(0f, 1f);
         switch (_disease.Type) {
             case DiseaseType.VirusA:
@@ -61,7 +69,7 @@ public abstract class Actor : MonoBehaviour
             default:
                 break;
         }
-        if(_actor.GetComponent<Disease>()!=null)
+        if(_actor.disease != null)
             StartCoroutine(_actor.StartSick(_disease));
     }
 
@@ -73,7 +81,6 @@ public abstract class Actor : MonoBehaviour
             sickTime += Time.deltaTime;
             yield return null;
         }
-        isSick = true;
         delActor();
         StartCoroutine(StartDeath(_disease));
     }
@@ -93,7 +100,7 @@ public abstract class Actor : MonoBehaviour
     {
         if (GetComponent<AI>() != null)
         {
-            GetComponent<AI>().enabled = false;
+            Destroy(GetComponent<AI>());
             Debug.Log("Desactivado");
         }
         else if(GetComponent<Player>() != null)

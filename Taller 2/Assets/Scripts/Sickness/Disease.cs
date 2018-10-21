@@ -40,7 +40,26 @@ public abstract class Disease : MonoBehaviour
 
     protected virtual void Start()
     {
-        GetComponent<Actor>().delActor = ShowSymptoms;
+        GetComponent<Actor>().delActor += ShowSymptoms;
+    }
+
+    public override string ToString()
+    {
+        switch (Type)
+        {
+            case DiseaseType.VirusA:
+                return "virusA";
+                break;
+            case DiseaseType.VirusS:
+                return "virusS";
+                break;
+            case DiseaseType.BlackDeath:
+                return "virusBlackDeath";
+                break;
+            default:
+                return "disease";
+                break;
+        }
     }
 
     protected abstract void ShowSymptoms();
