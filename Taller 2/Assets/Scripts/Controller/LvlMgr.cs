@@ -8,6 +8,11 @@ public class LvlMgr : MonoBehaviour
     [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider slider;
 
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+
     public void Levels(string levelName)
     {
         StartCoroutine(LoadAsynchronously(levelName));
@@ -25,4 +30,6 @@ public class LvlMgr : MonoBehaviour
             yield return null;
         }
     }
+
+
 }
