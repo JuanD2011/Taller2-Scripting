@@ -8,9 +8,10 @@ public class VirusS : VirusA
     protected override void Start()
     {
         base.Start();
+        initialOnSet = 45f;
         probToGetFreeze = 0.05f;
         speedDecrease = 0.2f;
-        OnSet = 45f;
+        OnSet = initialOnSet;
         TimeUntilDeath = 30f;
         type = DiseaseType.VirusS;
     }
@@ -25,7 +26,6 @@ public class VirusS : VirusA
     protected void Freeze()
     {
         float random = Random.Range(0f, 1f);
-        print(random);
         if(random <= probToGetFreeze)
         {
             //El jugador se queda quieto 2 segundos

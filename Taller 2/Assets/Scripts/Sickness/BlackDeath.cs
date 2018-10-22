@@ -6,11 +6,18 @@ public class BlackDeath : VirusS
     protected override void Start()
     {
         base.Start();
-        OnSet = 60f;
+        initialOnSet = 60f;
+        OnSet = initialOnSet;
         TimeUntilDeath = 20f;
         speedDecrease = 0.05f;
         probToGetFreeze = 0.15f;
         type = DiseaseType.BlackDeath;
+        InvokeRepeating("Freeze", 0f, 10f);
+        Invoke("GetComponents", 0f);
+    }
+
+    private void GetComponents()
+    {
         if (GetComponent<AI>() != null)
         {
             AI aI = GetComponent<AI>();
@@ -21,7 +28,6 @@ public class BlackDeath : VirusS
             Player player = GetComponent<Player>();
             StartCoroutine(DecreaseSpeed(player));
         }
-        InvokeRepeating("Freeze", 0f, 10f);
     }
 
     protected override void ShowSymptoms()

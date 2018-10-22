@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(key, GetRandomPoint(), Quaternion.identity);
+        Factory.Instance.Fabricate(key, GetRandomPoint());
 
         for (int i = 0; i < numberOfEachVaccine; i++)
         {

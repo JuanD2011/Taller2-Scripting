@@ -2,11 +2,13 @@
 
 public class VirusA : Disease
 {
+
     protected override void Start()
     {
         base.Start();
+        initialOnSet = 30f;
         speedDecrease = 0.1f;
-        OnSet = 30f;//30
+        OnSet = initialOnSet;//30
         TimeUntilDeath = 40f;//40
         type = DiseaseType.VirusA;
     }

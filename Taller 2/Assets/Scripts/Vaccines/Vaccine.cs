@@ -2,7 +2,7 @@
 
 public class Vaccine : MonoBehaviour
 {
-    private DiseaseType typeVaccine;
+    [SerializeField] private DiseaseType typeVaccine;
     public DiseaseType TypeVaccine
     {
         get
@@ -21,14 +21,7 @@ public class Vaccine : MonoBehaviour
     {
         get
         {
-            return immunity;
-        }
-
-        set
-        {
-            immunity = value;
+            return Random.Range(0.05f, 0.4f);
         }
     }
-
-
 }

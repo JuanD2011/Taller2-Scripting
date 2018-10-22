@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Survivor : Denizen
 {
@@ -14,15 +13,18 @@ public class Survivor : Denizen
         InvokeRepeating("GetVaccine", 0, 4);
     }
 
-    private void GetVaccine() {
-
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.localPosition, 10, transform.forward, out hit))
+    private void GetVaccine()
+    {
+        if (disease != null)
         {
-            if (hit.collider.GetComponent<Vaccine>() != null)
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.localPosition, 10, transform.forward, out hit))
             {
-                Agent.SetDestination(hit.transform.position);
-            }
+                if (hit.collider.GetComponent<Vaccine>() != null)
+                {
+                    Agent.SetDestination(hit.transform.position);
+                }
+            } 
         }
     }
 }

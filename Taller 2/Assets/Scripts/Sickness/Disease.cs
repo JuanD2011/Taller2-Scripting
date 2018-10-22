@@ -6,6 +6,7 @@ public abstract class Disease : MonoBehaviour
 {
     private float onSet; //After this time Actor is going to show symptoms
     private float timeUntilDeath; //After this time Actor will be dead;
+    protected float initialOnSet;
 
     protected DiseaseType type;
     protected float speedDecrease;
@@ -14,13 +15,14 @@ public abstract class Disease : MonoBehaviour
     {
         get
         {
-            return onSet;
+            return Mathf.Clamp(onSet, initialOnSet * 0.5f, initialOnSet);
         }
         set
         {
             onSet = value;
         }
     }
+
     public float TimeUntilDeath
     {
         get
@@ -33,7 +35,8 @@ public abstract class Disease : MonoBehaviour
         }
     }
 
-    public DiseaseType Type {
+    public DiseaseType Type
+    {
         get { return type; }
     }
 

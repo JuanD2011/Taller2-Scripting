@@ -1,5 +1,6 @@
 ﻿
-public enum DiseaseType{
+public enum DiseaseType
+{
     VirusA,
     VirusS,
     BlackDeath

@@ -84,9 +84,9 @@ public class Player : Actor
     {
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "WinCondition")
-            if(key)
+            if(key && disease == null)
                 print("Won");
             else
-                print("you need the key");
+                print("you need the key || be healthy");
     }
 }
