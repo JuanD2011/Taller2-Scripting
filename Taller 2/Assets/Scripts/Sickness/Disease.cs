@@ -81,7 +81,6 @@ public abstract class Disease : MonoBehaviour
 
     protected void DecreaseActorSpeed(float _percentOfDecrease)
     {
-        print(_percentOfDecrease + "%");
         if (GetComponent<AI>() != null)
         {
             float amountDecreased = GetComponent<AI>().Agent.speed * _percentOfDecrease;

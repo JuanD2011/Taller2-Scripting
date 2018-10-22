@@ -85,7 +85,6 @@ public abstract class Actor : MonoBehaviour
         m_Animator = GetComponent<Animator>();
 
         disease = GetComponent<Disease>();
-        print(disease);
 
         if (disease != null)
         {
@@ -95,19 +94,16 @@ public abstract class Actor : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Actor>() != null) {
-            print(string.Format("{0}'s disease: {1}", gameObject.name, disease));
-            if (disease != null)
-            {
-                SetDisease(disease, collision.gameObject.GetComponent<Actor>());
-            }
-            else {
-                disease = GetComponent<Disease>();
+        Actor actor = collision.gameObject.GetComponent<Actor>();
+        if (actor != null)
+        {
+            if (actor.GetComponent<Disease>() == null) {
                 if (disease != null)
                 {
-                    SetDisease(disease, collision.gameObject.GetComponent<Actor>());
+                    SetDisease(disease, actor);
                 }
             }
+            //print(string.Format("{0}'s disease: {1}", gameObject.name, disease));
         }
 
         if(collision.gameObject.GetComponent<Vaccine>())
@@ -157,6 +153,7 @@ public abstract class Actor : MonoBehaviour
 
     protected virtual void SetDisease(Disease _disease, Actor _actor) {
         float random = Random.Range(0f, 1f);
+
         switch (_disease.Type) {
             case DiseaseType.VirusA:
                 if (_actor.GetComponent<VirusA>() == null && random <= ProbToGetA)
@@ -173,13 +170,14 @@ public abstract class Actor : MonoBehaviour
             default:
                 break;
         }
-        if(_actor.disease != null)
+        if (_actor.disease != null)
             StartCoroutine(_actor.StartSick(_disease));
     }
 
     IEnumerator StartSick(Disease _disease)
     {
         sickTime = 0f;
+        print(_disease.gameObject.name);
         while (sickTime < _disease.OnSet)
         {
             sickTime += Time.deltaTime;
@@ -209,8 +207,7 @@ public abstract class Actor : MonoBehaviour
         {
             disease.CancelInvoke("Freeze");
             CancelInvoke("GetVaccine");
-            Destroy(this.gameObject);
-            Debug.Log("Desactivado");
+            Destroy(gameObject);
         }
         else if(GetComponent<Player>() != null)
         {

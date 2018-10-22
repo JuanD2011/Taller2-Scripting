@@ -6,9 +6,9 @@ public class BlackDeath : VirusS
     protected override void Start()
     {
         base.Start();
-        initialOnSet = 60f;
+        initialOnSet = 6f;
         OnSet = initialOnSet;
-        TimeUntilDeath = 20f;
+        TimeUntilDeath = 5f;
         speedDecrease = 0.05f;
         probToGetFreeze = 0.15f;
         type = DiseaseType.BlackDeath;
