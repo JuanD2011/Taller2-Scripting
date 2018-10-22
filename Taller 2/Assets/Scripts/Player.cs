@@ -2,6 +2,7 @@
 
 public class Player : Actor
 {
+    public static event GameState OnWin;
 
     private Vector2 input, inputDirection;
     private float targetRotation;
@@ -85,7 +86,11 @@ public class Player : Actor
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "WinCondition")
             if(key && disease == null)
+            {
                 print("Won");
+                OnWin();
+            }
+                
             else
                 print("you need the key || be healthy");
     }

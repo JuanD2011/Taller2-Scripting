@@ -19,6 +19,9 @@ public abstract class Actor : MonoBehaviour
     public delegate void DelActor();
     public DelActor delActor;
 
+    public delegate void GameState();
+    public static event GameState OnGameOver;
+
     public float ProbToGetA
     {
         get
@@ -84,6 +87,11 @@ public abstract class Actor : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
 
+        Invoke("Holi", 0f);
+    }
+
+    private void Holi()
+    {
         disease = GetComponent<Disease>();
 
         if (disease != null)
@@ -151,33 +159,45 @@ public abstract class Actor : MonoBehaviour
         }
     }
 
-    protected virtual void SetDisease(Disease _disease, Actor _actor) {
+    protected virtual void SetDisease(Disease _disease, Actor _actor)
+    {
+
         float random = Random.Range(0f, 1f);
 
-        switch (_disease.Type) {
+        switch (_disease.Type)
+        {
             case DiseaseType.VirusA:
                 if (_actor.GetComponent<VirusA>() == null && random <= ProbToGetA)
+                {
                     _actor.gameObject.AddComponent<VirusA>();
+                    _actor.disease = _actor.GetComponent<Disease>();
+                }
                 break;
             case DiseaseType.VirusS:
                 if (_actor.GetComponent<VirusS>() == null && random <= ProbToGetS)
+                {
                     _actor.gameObject.AddComponent<VirusS>();
+                    _actor.disease = _actor.GetComponent<Disease>();
+                }
                 break;
             case DiseaseType.BlackDeath:
                 if (_actor.GetComponent<BlackDeath>() == null && random <= ProbToGetBlackDeath)
+                {
                     _actor.gameObject.AddComponent<BlackDeath>();
+                    _actor.disease = _actor.GetComponent<Disease>();
+                }
                 break;
             default:
                 break;
         }
-        if (_actor.disease != null)
-            StartCoroutine(_actor.StartSick(_disease));
+
+        StartCoroutine(_actor.StartSick(_disease));
     }
 
     IEnumerator StartSick(Disease _disease)
     {
         sickTime = 0f;
-        print(_disease.gameObject.name);
+        print(_disease.OnSet);
         while (sickTime < _disease.OnSet)
         {
             sickTime += Time.deltaTime;
@@ -213,7 +233,7 @@ public abstract class Actor : MonoBehaviour
         {
             GetComponent<Player>().MoveSpeed = 0f;
             //Time.timeScale = 0f;
-            print("Game Over");
+            OnGameOver();
         }
     }
 }

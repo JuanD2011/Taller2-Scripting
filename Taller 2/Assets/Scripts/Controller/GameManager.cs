@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Collider plane;
     [SerializeField] GameObject vaccineTemplate;
     [SerializeField] int numberOfEachVaccine;
+    [SerializeField] GameObject canvasWin;
+    [SerializeField] Text textState;
 
     private void Start()
     {
@@ -18,10 +19,14 @@ public class GameManager : MonoBehaviour
             Factory.Instance.Fabricate(vaccineTemplate, GetRandomPoint(), DiseaseType.VirusA);
             Factory.Instance.Fabricate(vaccineTemplate, GetRandomPoint(), DiseaseType.VirusS);
         }
+
+        Actor.OnGameOver += GameOver;
+        Player.OnWin += Win;
     }
 
-    public void PausedGame() {
-        Time.timeScale = 0;
+    public void PausedGame()
+    {
+        Time.timeScale = 0.1f;
     }
 
     public void ResumeGame() {
@@ -30,6 +35,20 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame() {
         Application.Quit();
+    }
+
+    private void GameOver()
+    {
+        canvasWin.SetActive(true);
+        textState.text = "LOSER";
+        Time.timeScale = 0.1f;
+    }
+
+    private void Win()
+    {
+        canvasWin.SetActive(true);
+        textState.text = "WINNER";
+        Time.timeScale = 0.1f;
     }
 
     /// <summary>

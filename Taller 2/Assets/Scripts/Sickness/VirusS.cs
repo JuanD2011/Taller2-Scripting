@@ -8,7 +8,7 @@ public class VirusS : VirusA
     protected override void Start()
     {
         base.Start();
-        initialOnSet = 45f;
+        initialOnSet = 30f;
         probToGetFreeze = 0.05f;
         speedDecrease = 0.2f;
         OnSet = initialOnSet;

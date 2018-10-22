@@ -6,7 +6,7 @@ public class BlackDeath : VirusS
     protected override void Start()
     {
         base.Start();
-        initialOnSet = 6f;
+        initialOnSet = 40f;
         OnSet = initialOnSet;
         TimeUntilDeath = 5f;
         speedDecrease = 0.05f;

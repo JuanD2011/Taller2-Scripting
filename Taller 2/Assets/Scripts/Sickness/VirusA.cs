@@ -6,7 +6,7 @@ public class VirusA : Disease
     protected override void Start()
     {
         base.Start();
-        initialOnSet = 30f;
+        initialOnSet = 20f;
         speedDecrease = 0.1f;
         OnSet = initialOnSet;//30
         TimeUntilDeath = 40f;//40
